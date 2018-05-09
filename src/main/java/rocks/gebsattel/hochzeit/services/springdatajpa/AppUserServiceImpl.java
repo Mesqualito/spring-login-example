@@ -39,7 +39,7 @@ public class AppUserServiceImpl implements AppUserService {
     public void saveAppUser(AppUser appUser) {
         appUser.setPassword(bCryptPasswordEncoder.encode(appUser.getPassword()));
         appUser.setActive(1);
-        Role appUserRole = roleRepository.findByRole(RoleStatus.ADMIN);
+        Role appUserRole = roleRepository.findByRole(RoleStatus.ADMIN.name());
         appUser.setRoles(new HashSet<Role>(Arrays.asList(appUserRole)));
         appUserRepository.save(appUser);
     }

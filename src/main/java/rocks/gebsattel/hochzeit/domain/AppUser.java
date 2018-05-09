@@ -2,19 +2,18 @@ package rocks.gebsattel.hochzeit.domain;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 @Entity
-@Table(name = "appuser")
+@Table(name = "app_user")
 public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "appuser_id")
+    @Column(name = "app_user_id")
     private int id;
 
     @Column(name = "code")
