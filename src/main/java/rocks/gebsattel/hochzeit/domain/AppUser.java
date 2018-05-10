@@ -2,7 +2,19 @@ package rocks.gebsattel.hochzeit.domain;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
+import org.springframework.data.annotation.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Set;
@@ -13,12 +25,8 @@ public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "app_user_id")
-    private int id;
-
-    @Column(name = "code")
-    @NotEmpty(message = "Bitte Deinen Code eingeben!")
-    private String code;
+    @Column(name = "appuser_id")
+    private int appuser_id;
 
     @Column(name = "email")
     @Email(message = "Bitte eine gültige eMail-Adresse angeben!")
@@ -30,6 +38,11 @@ public class AppUser {
     @NotEmpty(message = "Bitte ein Passwort eingeben!")
     @Transient
     private String password;
+
+    @Column(name = "code")
+    @Length(min = 5, message = "Dein Code muss mindestens fünf Zeichen umfassen!")
+    @NotEmpty(message = "Bitte den Code eingeben!")
+    private String code;
 
     @Column(name = "first_name")
     @NotEmpty(message = "Bitte gib Deinen Vornamen ein!")
@@ -47,11 +60,11 @@ public class AppUser {
     private Set<Role> roles;
 
     public int getId() {
-        return id;
+        return appuser_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int appuser_id) {
+        this.appuser_id = appuser_id;
     }
 
     public String getEmail() {
@@ -109,4 +122,5 @@ public class AppUser {
     public void setCode(String code) {
         this.code = code;
     }
+
 }
